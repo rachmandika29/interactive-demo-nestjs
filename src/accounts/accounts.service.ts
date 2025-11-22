@@ -27,11 +27,10 @@ export class AccountsService {
   ];
 
   create(dto: CreateAccountDto): Account {
-    const existing = this.findByUserId(dto.userId);
-    if (existing) {
-      return existing;
-    }
-    const account: Account = { ...dto };
+    const account: Account = {
+      userId: (this.accounts.length + 1).toString(),
+      ...dto,
+    };
     this.accounts.push(account);
     return account;
   }

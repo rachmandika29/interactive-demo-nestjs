@@ -26,10 +26,6 @@ export class AccountsController {
     @Body(new ValidationPipe({ whitelist: true, transform: true }))
     body: CreateAccountDto,
   ) {
-    const existing = this.accountsService.findByUserId(body.userId);
-    if (existing) {
-      throw new ConflictException('Account for this user already exists');
-    }
     return this.accountsService.create(body);
   }
 
@@ -40,7 +36,8 @@ export class AccountsController {
 
   @Get(':userId')
   getAccount(
-    @Param(new ValidationPipe({ whitelist: true, transform: true })) params: UserIdParamDto,
+    @Param(new ValidationPipe({ whitelist: true, transform: true }))
+    params: UserIdParamDto,
   ) {
     const acc = this.accountsService.findByUserId(params.userId);
     if (!acc) {
@@ -51,7 +48,8 @@ export class AccountsController {
 
   @Patch(':userId')
   updateAccount(
-    @Param(new ValidationPipe({ whitelist: true, transform: true })) params: UserIdParamDto,
+    @Param(new ValidationPipe({ whitelist: true, transform: true }))
+    params: UserIdParamDto,
     @Body(new ValidationPipe({ whitelist: true, transform: true }))
     body: UpdateAccountDto,
   ) {
@@ -64,7 +62,8 @@ export class AccountsController {
 
   @Delete(':userId')
   deleteAccount(
-    @Param(new ValidationPipe({ whitelist: true, transform: true })) params: UserIdParamDto,
+    @Param(new ValidationPipe({ whitelist: true, transform: true }))
+    params: UserIdParamDto,
   ) {
     const deleted = this.accountsService.removeByUserId(params.userId);
     if (!deleted) {

@@ -8,10 +8,6 @@ export enum AccountType {
 export class CreateAccountDto {
   @IsString()
   @IsNotEmpty()
-  userId!: string;
-
-  @IsString()
-  @IsNotEmpty()
   accountName!: string;
 
   @IsNumber()
